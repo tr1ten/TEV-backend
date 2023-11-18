@@ -4,7 +4,7 @@ const User = require('../models/User'); // Adjust the path based on your file st
 
 router.get('/', async (req, res) => {
   try {
-    const { page = 1, limit = 20, domain, gender, availability, search } = req.query;
+    const { page = 1, limit = 20, domain, gender, available, search } = req.query;
     const query = {};
 
     if (domain) {
@@ -14,9 +14,9 @@ router.get('/', async (req, res) => {
     if (gender) {
       query.gender = gender;
     }
-
-    if (availability) {
-      query.availability = availability === 'true';
+    console.log(available, typeof available, available != 'false');
+    if (available) {
+      query.available = available != 'false';
     }
 
     if (search) {

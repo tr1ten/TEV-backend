@@ -5,7 +5,7 @@ const Team = require('../models/Team');
 
 router.post('/', async (req, res) => {
   try {
-    const { users, team_name } = req.body;
+    const { members:users, team_name } = req.body;
     // map string id to Number
     const selectedUsers = await User.find({ id: { $in: users.map(Number) } });
 
@@ -45,4 +45,14 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// get all teams 
+router.get('/', async (req, res) => {
+  try {
+    const teams = await Team.find().populate('members', 'first_name last_name email');
+    res.json(teams);
+  } catch (error) {
+    console.error('Error retrieving teams:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 module.exports = router;

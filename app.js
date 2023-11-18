@@ -2,12 +2,16 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cors = require('cors');
 const start = require("./db");
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const teamRouter = require('./routes/team');
 var app = express();
+// enable cors
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

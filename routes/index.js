@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 router.get('/domains', async (req, res) => {
   try {
     const uniqueDomains = await User.distinct('domain');
-    res.json({ uniqueDomains });
+    res.json({ domains: uniqueDomains  });
   } catch (error) {
     console.error('Error retrieving unique domains:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -19,7 +19,7 @@ router.get('/domains', async (req, res) => {
 router.get('/genders', async (req, res) => {
   try {
     const uniqueGenders = await User.distinct('gender');
-    res.json({ uniqueGenders });
+    res.json({ genders: uniqueGenders });
   } catch (error) {
     console.error('Error retrieving unique genders:', error);
     res.status(500).json({ error: 'Internal Server Error' });
